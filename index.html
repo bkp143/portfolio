@@ -400,10 +400,30 @@
     /* ========== ABOUT ME CARDS ========== */
     .about-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 2rem;
       max-width: 1400px;
       margin: 0 auto;
+    }
+    
+    /* Center the 3rd card when it's alone in the row */
+    .about-card:nth-child(3) {
+      grid-column: 1 / -1;
+      max-width: calc(50% - 1rem);
+      margin: 0 auto;
+    }
+    
+    /* On desktop (3 columns), reset the 3rd card */
+    @media (min-width: 1200px) {
+      .about-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .about-card:nth-child(3) {
+        grid-column: auto;
+        max-width: none;
+        margin: 0;
+      }
     }
     
     .about-card {
@@ -891,6 +911,12 @@
         width: 100%;
       }
       
+      .about-card:nth-child(3) {
+        grid-column: auto !important;
+        max-width: none !important;
+        margin: 0 !important;
+      }
+      
       .about-icon {
         width: 60px;
         height: 60px;
@@ -1135,13 +1161,15 @@
     }
     
     /* Medium devices (tablets, less than 992px) */
-    @media (max-width: 992px) {
+    @media (max-width: 992px) and (min-width: 769px) {
       .about-grid {
-        grid-template-columns: 1fr !important;
-        gap: 1.5rem !important;
-        max-width: 600px !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+      
+      .about-card:nth-child(3) {
+        grid-column: 1 / -1 !important;
+        max-width: calc(50% - 1rem) !important;
         margin: 0 auto !important;
-        padding: 0 15px;
       }
     }
   </style>
